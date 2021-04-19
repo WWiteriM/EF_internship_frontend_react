@@ -25,8 +25,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src --fix",
-    "prettier": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|md)\""
+    "lint": "eslint ./src",
+    "fix": "eslint ./src --fix",
+    "prettier": "prettier --write \"**/*.+(json|yml|yaml|css|md)\""
   },
   "eslintConfig": {
     "extends": [
