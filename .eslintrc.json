@@ -19,6 +19,7 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "no-use-before-define": ["error", { "functions": false, "classes": true }],
     "linebreak-style": 0,
-    "indent": ["error", 2, { "MemberExpression": 1 }]
+    "indent": ["error", 2, { "MemberExpression": 1 }],
+    "react/prop-types": "off"
   }
 }
