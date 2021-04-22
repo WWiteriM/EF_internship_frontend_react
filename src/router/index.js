@@ -4,8 +4,8 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import LoginForm from '../components/LoginForm';
-import RegisterForm from '../components/RegisterForm';
+import LoginPage from '../pages/loginPage';
+import RegisterPage from '../pages/registerPage';
 
 export default function App() {
   return (
@@ -13,10 +13,10 @@ export default function App() {
       <div>
         <Switch>
           <Route path="/login">
-            <LoginForm />
+            <LoginPage />
           </Route>
           <Route path="/registration">
-            <RegisterForm />
+            <RegisterPage />
           </Route>
           <Route path="/">
             <Home />
