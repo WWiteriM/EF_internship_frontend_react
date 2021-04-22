@@ -1,7 +1,7 @@
 import React from 'react';
-import API from './baseURL';
+import API from '../http/baseURL';
 
-export default class App extends React.Component {
+export default class LoginForm extends React.Component {
   handleChangeEmail = (event) => {
     this.setState({ email: event.target.value });
   }
