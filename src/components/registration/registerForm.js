@@ -1,5 +1,25 @@
 import React, { useState } from 'react';
-import API from '../../http/baseURL';
+import styled from 'styled-components';
+import registration from '../../http/requests/registration';
+
+const Wrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    color: black;
+  `;
+
+const RegisterContainer = styled.div`
+    padding: 40px;
+    width: 80%;
+    max-width: 500px;
+    border: 1px solid #dedede;
+    background-color: darkgrey;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  `;
 
 export default function RegisterForm() {
   const [name, setName] = useState('');
@@ -25,14 +45,15 @@ export default function RegisterForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await API.post('auth/registration', {
+    const data = {
       email, password, name, surname,
-    });
+    };
+    await registration(data);
   };
 
   return (
-    <div className="wrapper">
-      <div className="registerContainer">
+    <Wrapper>
+      <RegisterContainer>
         <form onSubmit={handleSubmit}>
           <p>Register person data:</p>
           <input
@@ -61,7 +82,7 @@ export default function RegisterForm() {
           />
           <button type="submit">Register</button>
         </form>
-      </div>
-    </div>
+      </RegisterContainer>
+    </Wrapper>
   );
 }

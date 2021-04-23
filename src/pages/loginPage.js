@@ -1,12 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import LoginForm from '../components/login/loginForm';
 
 export default function Login() {
-  const [token, setToken] = useState(null);
-
-  console.log(token);
-
   return (
-    <LoginForm setToken={setToken} />
+    <LoginForm />
   );
 }

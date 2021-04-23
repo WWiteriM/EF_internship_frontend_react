@@ -1,10 +1,27 @@
 import React, { useState } from 'react';
-import API from '../../http/baseURL';
-import '../style.css';
+import styled from 'styled-components';
+import login from '../../http/requests/login';
 
-export default function LoginForm(props) {
-  const { setToken } = props;
+const Wrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    color: black;
+  `;
 
+const LoginContainer = styled.div`
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    border: 1px solid #dedede;
+    background-color: darkgrey;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  `;
+
+export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -18,15 +35,15 @@ export default function LoginForm(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const token = await API.post('auth/login', { email, password });
-    setToken(token.data);
+    const data = { email, password };
+    await login(data);
   };
 
   return (
-    <div className="wrapper">
-      <div className="loginContainer">
+    <Wrapper>
+      <LoginContainer>
         <form onSubmit={handleSubmit}>
-          <p>Login data:</p>
+          <p>EF-Network login:</p>
           <input
             type="email"
             name="email"
@@ -43,7 +60,7 @@ export default function LoginForm(props) {
           />
           <button type="submit">Login</button>
         </form>
-      </div>
-    </div>
+      </LoginContainer>
+    </Wrapper>
   );
 }
