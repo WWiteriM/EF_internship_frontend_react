@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import login from '../../http/requests/login';
+import registration from '../http/requests/registration';
 
 const Wrapper = styled.div`
     display: flex;
@@ -9,8 +9,8 @@ const Wrapper = styled.div`
     color: black;
   `;
 
-const LoginContainer = styled.div`
-    padding: 20px;
+const RegisterContainer = styled.div`
+    padding: 40px;
     width: 80%;
     max-width: 500px;
     border: 1px solid #dedede;
@@ -21,46 +21,52 @@ const LoginContainer = styled.div`
     -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   `;
 
-export default function LoginForm() {
+export default function RegisterForm() {
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleChangeEmail = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handleChangePassword = (event) => {
-    setPassword(event.target.value);
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = { email, password };
-    await login(data);
+    const data = {
+      email, password, name, surname,
+    };
+    await registration(data);
   };
 
   return (
     <Wrapper>
-      <LoginContainer>
+      <RegisterContainer>
         <form onSubmit={handleSubmit}>
-          <p>EF-Network login:</p>
+          <p>Register person data:</p>
+          <input
+            type="text"
+            name="name"
+            placeholder="first name"
+            onChange={(event) => setName(event.target.value)}
+          />
+          <input
+            type="text"
+            name="surname"
+            placeholder="last name"
+            onChange={(event) => setSurname(event.target.value)}
+          />
           <input
             type="email"
             name="email"
             placeholder="email"
-            value={email}
-            onChange={handleChangeEmail}
+            onChange={(event) => setEmail(event.target.value)}
           />
           <input
             type="password"
             name="password"
             placeholder="password"
-            value={password}
-            onChange={handleChangePassword}
+            onChange={(event) => setPassword(event.target.value)}
           />
-          <button type="submit">Login</button>
+          <button type="submit">Register</button>
         </form>
-      </LoginContainer>
+      </RegisterContainer>
     </Wrapper>
   );
 }
