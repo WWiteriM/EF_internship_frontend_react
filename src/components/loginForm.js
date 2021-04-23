@@ -38,7 +38,7 @@ export default function LoginForm(props) {
         value={password}
         onChange={handleChangePassword}
       />
-      <button type="submit">Add</button>
+      <button type="submit">Login</button>
     </form>
   );
 }
