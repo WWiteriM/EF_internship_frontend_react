@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { Wrapper, RegisterContainer } from './style';
 import registration from '../../http/requests/registration';
 
