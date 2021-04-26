@@ -1,27 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import login from '../http/requests/login';
+import { Wrapper, LoginContainer } from './style';
+import login from '../../http/requests/login';
 
-const Wrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    color: black;
-  `;
-
-const LoginContainer = styled.div`
-    padding: 20px;
-    width: 80%;
-    max-width: 500px;
-    border: 1px solid #dedede;
-    background-color: darkgrey;
-    text-align: center;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-  `;
-
-export default function LoginForm() {
+function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -86,27 +67,39 @@ export default function LoginForm() {
       <LoginContainer>
         <form onSubmit={submitHandler}>
           <p>EF-Network login:</p>
-          {(emailDirty && emailError) && <div style={{ color: 'red' }}>{emailError}</div>}
+          {emailDirty && emailError && <div style={{ color: 'red' }}>{emailError}</div>}
           <input
             type="email"
             name="email"
             value={email}
-            onBlur={(e) => { blurHandler(e); }}
+            onBlur={(e) => {
+              blurHandler(e);
+            }}
             placeholder="email"
-            onChange={(e) => { emailHandler(e); }}
+            onChange={(e) => {
+              emailHandler(e);
+            }}
           />
-          {(passwordDirty && passwordError) && <div style={{ color: 'red' }}>{passwordError}</div>}
+          {passwordDirty && passwordError && <div style={{ color: 'red' }}>{passwordError}</div>}
           <input
             type="password"
             name="password"
             value={password}
-            onBlur={(e) => { blurHandler(e); }}
+            onBlur={(e) => {
+              blurHandler(e);
+            }}
             placeholder="password"
-            onChange={(e) => { passwordHandler(e); }}
+            onChange={(e) => {
+              passwordHandler(e);
+            }}
           />
-          <button disabled={!formValid} type="submit">Login</button>
+          <button disabled={!formValid} type="submit">
+            Login
+          </button>
         </form>
       </LoginContainer>
     </Wrapper>
   );
 }
+
+export default LoginForm;
