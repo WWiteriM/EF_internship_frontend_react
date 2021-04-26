@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { Wrapper, RegisterContainer } from './style';
 import registration from '../../http/requests/registration';
@@ -9,8 +10,9 @@ function RegisterForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const onSubmit = async () => {
     const data = {
       email,
       password,
@@ -23,29 +25,37 @@ function RegisterForm() {
   return (
     <Wrapper>
       <RegisterContainer>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <p>Register person data:</p>
+          {errors.name && <p>{errors.name.message}</p>}
           <input
             type="text"
-            name="name"
+            {...register('name', { required: 'This is required' })}
+            value={name}
             placeholder="first name"
             onChange={(event) => setName(event.target.value)}
           />
+          {errors.surname && <p>{errors.surname.message}</p>}
           <input
             type="text"
-            name="surname"
+            {...register('surname', { required: 'This is required' })}
+            value={surname}
             placeholder="last name"
             onChange={(event) => setSurname(event.target.value)}
           />
+          {errors.email && <p>{errors.email.message}</p>}
           <input
             type="email"
-            name="email"
+            {...register('email', { required: 'This is required' })}
+            value={email}
             placeholder="email"
             onChange={(event) => setEmail(event.target.value)}
           />
+          {errors.password && <p>{errors.password.message}</p>}
           <input
             type="password"
-            name="password"
+            {...register('password', { required: 'This is required', minLength: { value: 4, message: 'Your password is too short' } })}
+            value={password}
             placeholder="password"
             onChange={(event) => setPassword(event.target.value)}
           />
