@@ -19,4 +19,10 @@ const LoginContainer = styled.div`
 	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 `;
 
-export { LoginContainer, Wrapper };
+const ErrorMessage = styled.p`
+  font-size: 20px;
+	color: red;
+	text-align: left;
+`;
+
+export { LoginContainer, Wrapper, ErrorMessage };

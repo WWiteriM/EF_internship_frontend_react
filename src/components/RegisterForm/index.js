@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Wrapper, RegisterContainer } from './style';
+import { Wrapper, RegisterContainer, ErrorMessage } from './style';
 import registration from '../../http/requests/registration';
 
 function RegisterForm() {
@@ -26,8 +26,8 @@ function RegisterForm() {
     <Wrapper>
       <RegisterContainer>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <p>Register person data:</p>
-          {errors.name && <p>{errors.name.message}</p>}
+          <h1>Register person data:</h1>
+          {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
           <input
             type="text"
             {...register('name', { required: 'This is required' })}
@@ -35,7 +35,7 @@ function RegisterForm() {
             placeholder="first name"
             onChange={(event) => setName(event.target.value)}
           />
-          {errors.surname && <p>{errors.surname.message}</p>}
+          {errors.surname && <ErrorMessage>{errors.surname.message}</ErrorMessage>}
           <input
             type="text"
             {...register('surname', { required: 'This is required' })}
@@ -43,7 +43,7 @@ function RegisterForm() {
             placeholder="last name"
             onChange={(event) => setSurname(event.target.value)}
           />
-          {errors.email && <p>{errors.email.message}</p>}
+          {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
           <input
             type="email"
             {...register('email', { required: 'This is required' })}
@@ -51,7 +51,7 @@ function RegisterForm() {
             placeholder="email"
             onChange={(event) => setEmail(event.target.value)}
           />
-          {errors.password && <p>{errors.password.message}</p>}
+          {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
           <input
             type="password"
             {...register('password', { required: 'This is required', minLength: { value: 4, message: 'Your password is too short' } })}

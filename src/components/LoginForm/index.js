@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Wrapper, LoginContainer } from './style';
+import { Wrapper, LoginContainer, ErrorMessage } from './style';
 import login from '../../http/requests/login';
 
 function LoginForm() {
@@ -19,8 +19,8 @@ function LoginForm() {
     <Wrapper>
       <LoginContainer>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <p>EF-Network login:</p>
-          {errors.email && <p>{errors.email.message}</p>}
+          <h1>EF-Network login:</h1>
+          {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
           <input
             {...register('email', { required: 'This is required' })}
             type="email"
@@ -30,7 +30,7 @@ function LoginForm() {
               setEmail(e.target.value);
             }}
           />
-          {errors.password && <p>{errors.password.message}</p>}
+          {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
           <input
             {...register('password', { required: 'This is required', minLength: { value: 4, message: 'Your password is too short' } })}
             type="password"
