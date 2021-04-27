@@ -17,11 +17,17 @@
     "jsx-quotes": [1, "prefer-double"],
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/jsx-props-no-spreading": "off",
     "no-use-before-define": ["error", { "functions": false, "classes": true }],
     "linebreak-style": 0,
+    "react/jsx-props-no-spreading": [
+      "error",
+      {
+        "html": "ignore",
+        "custom": "ignore",
+        "exceptions": [""]
+      }
+    ],
     "indent": ["error", 2, { "MemberExpression": 1 }],
-    "react/prop-types": "off",
-    "no-tabs": 0
+    "react/prop-types": "off"
   }
 }

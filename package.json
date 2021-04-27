@@ -35,7 +35,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src",
     "fix": "eslint ./src --fix",
-    "stylelint": "npx stylelint \"**/style.js\" --fix",
+    "stylelint": "stylelint \"**/style.js\"",
     "prettier": "prettier --write \"**/*.+(json|yml|yaml|css|md)\""
   },
   "eslintConfig": {
@@ -73,10 +73,10 @@
   },
   "lint-staged": {
     "*.+(js|jsx)": [
-      "npm run lint"
+      "npm run lint",
+      "npm run stylelint"
     ],
     "*.+(json|css|md)": [
-      "npm run stylelint",
       "npm run prettier"
     ]
   }
