@@ -19,10 +19,6 @@ const RegisterContainer = styled.div`
 	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 `;
 
-const ErrorMessage = styled.p`
-  font-size: 20px;
-	color: red;
-	text-align: left;
-`;
-
-export { Wrapper, RegisterContainer, ErrorMessage };
+export {
+  Wrapper, RegisterContainer,
+};

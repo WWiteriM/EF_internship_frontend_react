@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
-import { Wrapper, LoginContainer, ErrorMessage } from './style';
 import login from '../../http/requests/login';
+import TextInput from '../TextInput/index';
+import {
+  Wrapper, LoginContainer,
+} from './style';
+
+const loginSchema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().min(4).max(20).required(),
+});
 
 function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(loginSchema),
+  });
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
-
-  const onSubmit = async () => {
-    const data = { email, password };
+  const onSubmit = async (data) => {
     await login(data);
   };
 
@@ -20,25 +28,17 @@ function LoginForm() {
       <LoginContainer>
         <form onSubmit={handleSubmit(onSubmit)}>
           <h1>EF-Network login:</h1>
-          {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
-          <input
-            {...register('email', { required: 'This is required' })}
+          <TextInput
+            register={register}
             type="email"
-            value={email}
-            placeholder="email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
+            label="email"
+            err={errors.email}
           />
-          {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
-          <input
-            {...register('password', { required: 'This is required', minLength: { value: 4, message: 'Your password is too short' } })}
+          <TextInput
+            register={register}
             type="password"
-            value={password}
-            placeholder="password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
+            label="password"
+            err={errors.password}
           />
           <button type="submit">
             Login

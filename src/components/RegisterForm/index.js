@@ -1,24 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
-import { Wrapper, RegisterContainer, ErrorMessage } from './style';
 import registration from '../../http/requests/registration';
+import TextInput from '../TextInput/index';
+import {
+  Wrapper, RegisterContainer,
+} from './style';
+
+const registerSchema = yup.object().shape({
+  name: yup.string().trim().required(),
+  surname: yup.string().trim().required(),
+  email: yup.string().email().required(),
+  password: yup.string().required().min(4).max(20),
+});
 
 function RegisterForm() {
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { handleSubmit, formState: { errors }, register } = useForm({
+    resolver: yupResolver(registerSchema),
+  });
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
-
-  const onSubmit = async () => {
-    const data = {
-      email,
-      password,
-      name,
-      surname,
-    };
+  const onSubmit = async (data) => {
     await registration(data);
   };
 
@@ -27,37 +30,29 @@ function RegisterForm() {
       <RegisterContainer>
         <form onSubmit={handleSubmit(onSubmit)}>
           <h1>Register person data:</h1>
-          {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
-          <input
+          <TextInput
             type="text"
-            {...register('name', { required: 'This is required' })}
-            value={name}
-            placeholder="first name"
-            onChange={(event) => setName(event.target.value)}
+            label="name"
+            register={register}
+            err={errors.name}
           />
-          {errors.surname && <ErrorMessage>{errors.surname.message}</ErrorMessage>}
-          <input
+          <TextInput
             type="text"
-            {...register('surname', { required: 'This is required' })}
-            value={surname}
-            placeholder="last name"
-            onChange={(event) => setSurname(event.target.value)}
+            label="surname"
+            register={register}
+            err={errors.surname}
           />
-          {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
-          <input
+          <TextInput
+            label="email"
             type="email"
-            {...register('email', { required: 'This is required' })}
-            value={email}
-            placeholder="email"
-            onChange={(event) => setEmail(event.target.value)}
+            register={register}
+            err={errors.email}
           />
-          {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
-          <input
+          <TextInput
+            label="password"
             type="password"
-            {...register('password', { required: 'This is required', minLength: { value: 4, message: 'Your password is too short' } })}
-            value={password}
-            placeholder="password"
-            onChange={(event) => setPassword(event.target.value)}
+            register={register}
+            err={errors.password}
           />
           <button type="submit">Register</button>
         </form>
