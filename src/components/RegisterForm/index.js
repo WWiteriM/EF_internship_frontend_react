@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import registration from '../../http/requests/registration';
+import { registration } from '../../http/requests/auth';
 import TextInput from '../TextInput/index';
 import {
   Wrapper, RegisterContainer,
@@ -26,7 +26,7 @@ function RegisterForm() {
 
   const onSubmit = async (data) => {
     await registration(data);
-    await history.push('/login');
+    await history.push('/index');
   };
 
   return (

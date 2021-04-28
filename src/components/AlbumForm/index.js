@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import getAllAlbums from '../../http/requests/getAllAlbums';
+import getAllAlbums from '../../http/requests/albums/index';
 import AlbumRow from './AlbumRow';
 import {
   TableContainer, Table, TableHead,

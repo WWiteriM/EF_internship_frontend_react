@@ -1,4 +1,4 @@
-import API from '../baseURL';
+import API from '../../baseURL';
 
 const getAllAlbums = async () => {
   const res = await API.get('albums');

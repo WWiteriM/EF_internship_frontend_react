@@ -1,4 +1,4 @@
-import API from '../baseURL';
+import API from '../../baseURL';
 
 const login = async (data) => {
   const token = await API.post('auth/login', data);
@@ -6,4 +6,8 @@ const login = async (data) => {
   await localStorage.setItem('refreshToken', token.data.refreshToken);
 };
 
-export default login;
+const registration = async (data) => {
+  await API.post('auth/registration', data);
+};
+
+export { login, registration };
