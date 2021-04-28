@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -17,12 +18,15 @@ const registerSchema = yup.object().shape({
 });
 
 function RegisterForm() {
+  const history = useHistory();
+
   const { handleSubmit, formState: { errors }, register } = useForm({
     resolver: yupResolver(registerSchema),
   });
 
   const onSubmit = async (data) => {
     await registration(data);
+    await history.push('/login');
   };
 
   return (

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -15,12 +16,15 @@ const loginSchema = yup.object().shape({
 });
 
 function LoginForm() {
+  const history = useHistory();
+
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(loginSchema),
   });
 
   const onSubmit = async (data) => {
     await login(data);
+    await history.push('/albums');
   };
 
   return (
