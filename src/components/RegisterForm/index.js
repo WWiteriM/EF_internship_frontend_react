@@ -26,7 +26,7 @@ function RegisterForm() {
 
   const onSubmit = async (data) => {
     await registration(data);
-    await history.push('/index');
+    await history.push('/login');
   };
 
   return (
