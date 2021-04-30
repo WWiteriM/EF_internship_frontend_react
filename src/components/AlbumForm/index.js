@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import getAllAlbums from '../../http/requests/albums/index';
+import { getAllAlbums } from '../../http/requests/albums/index';
 import AlbumRow from './AlbumRow';
 import {
   TableContainer, Table, TableHead,
@@ -21,6 +21,7 @@ function AlbumForm() {
           <TableHead>
             <th>Album Id</th>
             <th>Album name</th>
+            <th>Control</th>
           </TableHead>
         </thead>
         <tbody>

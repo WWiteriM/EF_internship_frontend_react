@@ -5,4 +5,9 @@ const getAllAlbums = async () => {
   return res.data;
 };
 
-export default getAllAlbums;
+const updateAlbum = async (id, data) => {
+  const res = await API.put(`albums/${id}`, data);
+  return res.data;
+};
+
+export { getAllAlbums, updateAlbum };

@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import UpdateAlbum from '../UpdateAlbum/index';
+
 import {
-  TableRow, TableCell,
+  TableRow, TableCell, TableCellLink, TableCellControl, Update, Delete,
 } from './style';
 
 function AlbumRow(props) {
   const { el } = props;
 
+  const [isOpen, setIsOpen] = useState(false);
   const history = useHistory();
 
   const redirectToAlbum = (id) => {
@@ -15,9 +18,14 @@ function AlbumRow(props) {
   };
 
   return (
-    <TableRow onClick={() => { redirectToAlbum(el.id); }}>
+    <TableRow>
       <TableCell>{el.id}</TableCell>
-      <TableCell className="albumRow">{el.name}</TableCell>
+      <TableCellLink onClick={() => { redirectToAlbum(el.id); }}>{el.name}</TableCellLink>
+      <TableCellControl>
+        <Update onClick={() => setIsOpen(true)}>Update</Update>
+        <UpdateAlbum id={el.id} open={isOpen} onClose={() => setIsOpen(false)} />
+        <Delete>Delete</Delete>
+      </TableCellControl>
     </TableRow>
   );
 }
