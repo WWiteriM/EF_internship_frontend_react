@@ -1,11 +1,5 @@
 import React from 'react';
 
-import AlbumForm from '../../components/AlbumForm/index';
-
-function AlbumPage() {
-  return <AlbumForm />;
-}
-
 function AlbumInfoPage(props) {
   const { match } = props;
 
@@ -18,4 +12,4 @@ function AlbumInfoPage(props) {
   );
 }
 
-export { AlbumPage, AlbumInfoPage };
+export default AlbumInfoPage;

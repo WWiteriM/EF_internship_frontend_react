@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import LoginPage from '../pages/Login';
 import RegisterPage from '../pages/Registration';
-import { AlbumPage, AlbumInfoPage } from '../pages/Albums/index';
+import AlbumPage from '../pages/AllAlbums/index';
+import AlbumInfoPage from '../pages/Album/index';
 
 function App() {
   return (
