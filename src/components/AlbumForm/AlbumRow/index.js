@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
+import Popup from 'reactjs-popup';
 import { useHistory } from 'react-router-dom';
 
 import UpdateAlbum from '../UpdateAlbum/index';
-
+import DeleteAlbum from '../DeleteAlbum/index';
 import {
-  TableRow, TableCell, TableCellLink, TableCellControl, Update, Delete,
+  TableRow,
+  TableCell,
+  TableCellLink,
+  TableCellControl,
+  Update,
+  Delete,
+  ControlPanel,
 } from './style';
 
 function AlbumRow(props) {
-  const { el } = props;
-
-  const [isOpen, setIsOpen] = useState(false);
+  const { el, setAlbums } = props;
   const history = useHistory();
 
   const redirectToAlbum = (id) => {
@@ -21,11 +26,45 @@ function AlbumRow(props) {
     <TableRow>
       <TableCell>{el.id}</TableCell>
       <TableCellLink onClick={() => { redirectToAlbum(el.id); }}>{el.name}</TableCellLink>
-      <TableCellControl>
-        <Update onClick={() => setIsOpen(true)}>Update</Update>
-        <UpdateAlbum id={el.id} open={isOpen} onClose={() => setIsOpen(false)} />
-        <Delete>Delete</Delete>
-      </TableCellControl>
+      <Popup
+        trigger={() => (
+          <TableCellControl>
+            Control panel
+          </TableCellControl>
+        )}
+        position="right center"
+        closeOnDocumentClick
+        nested
+      >
+        <ControlPanel>
+          <Popup
+            trigger={<Update> Update </Update>}
+            modal
+            nested
+          >
+            {(close) => (
+              <UpdateAlbum
+                setAlbums={setAlbums}
+                id={el.id}
+                onClose={() => close()}
+              />
+            )}
+          </Popup>
+          <Popup
+            trigger={<Delete> Delete </Delete>}
+            modal
+            nested
+          >
+            {(close) => (
+              <DeleteAlbum
+                setAlbums={setAlbums}
+                id={el.id}
+                onClose={() => close()}
+              />
+            )}
+          </Popup>
+        </ControlPanel>
+      </Popup>
     </TableRow>
   );
 }

@@ -10,4 +10,8 @@ const updateAlbum = async (id, data) => {
   return res.data;
 };
 
-export { getAllAlbums, updateAlbum };
+const deleteAlbum = async (id) => {
+  await API.delete(`albums/${id}`);
+};
+
+export { getAllAlbums, updateAlbum, deleteAlbum };

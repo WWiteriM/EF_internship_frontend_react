@@ -25,7 +25,7 @@ function AlbumForm() {
           </TableHead>
         </thead>
         <tbody>
-          {albums.map((el) => <AlbumRow key={el.id} el={el} />)}
+          {albums.map((el) => <AlbumRow setAlbums={setAlbums} key={el.id} el={el} />)}
         </tbody>
       </Table>
     </TableContainer>
