@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import PropTypes from 'prop-types';
 
 import { deleteAlbum, getAllAlbums } from '../../../http/requests/albums/index';
 import {
@@ -10,9 +11,7 @@ import {
   ActionButton,
 } from './style';
 
-function DeleteAlbum({
-  id, onClose, setAlbums,
-}) {
+function DeleteAlbum({ id, onClose, setAlbums }) {
   const { handleSubmit } = useForm();
 
   const onSubmit = async () => {
@@ -26,30 +25,26 @@ function DeleteAlbum({
     <DeleteAlbumContainer>
       <DeleteAlbumContent>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h1>
-            Delete
-            {' '}
-            {id}
-            {' '}
-            album
-          </h1>
+          <h1>Delete {id} album</h1>
           <Label>
             <strong>Warning! </strong>
-            Are you sure you want to delete this entry?
-            If you delete the entry, it will be impossible to restore it.
+            Are you sure you want to delete this entry? If you delete the entry, it will be
+            impossible to restore it.
           </Label>
           <FormDeleteAction>
-            <ActionButton type="submit">
-              Delete
-            </ActionButton>
-            <ActionButton onClick={onClose}>
-              Cancel
-            </ActionButton>
+            <ActionButton type="submit">Delete</ActionButton>
+            <ActionButton onClick={onClose}>Cancel</ActionButton>
           </FormDeleteAction>
         </form>
       </DeleteAlbumContent>
     </DeleteAlbumContainer>
   );
 }
+
+DeleteAlbum.propTypes = {
+  id: PropTypes.number.isRequired,
+  onClose: PropTypes.func.isRequired,
+  setAlbums: PropTypes.shape.isRequired,
+};
 
 export default DeleteAlbum;
