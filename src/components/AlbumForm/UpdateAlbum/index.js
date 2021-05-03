@@ -38,7 +38,10 @@ function UpdateAlbum({ id, onClose, setAlbums }) {
     <UpdateAlbumContainer>
       <UpdateAlbumContent>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h1>Update {id} album:</h1>
+          <h1>
+            Update
+            {id} album:
+          </h1>
           <Label>
             Fill in all the required fields in order to change the information about the album.
             Remember, all fields must be filled
@@ -57,7 +60,7 @@ function UpdateAlbum({ id, onClose, setAlbums }) {
 UpdateAlbum.propTypes = {
   id: PropTypes.number.isRequired,
   onClose: PropTypes.func.isRequired,
-  setAlbums: PropTypes.shape.isRequired,
+  setAlbums: PropTypes.func.isRequired,
 };
 
 export default UpdateAlbum;

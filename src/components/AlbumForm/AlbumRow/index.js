@@ -53,8 +53,8 @@ function AlbumRow(props) {
 }
 
 AlbumRow.propTypes = {
-  el: PropTypes.shape.isRequired,
-  setAlbums: PropTypes.shape.isRequired,
+  el: PropTypes.objectOf(PropTypes.object).isRequired,
+  setAlbums: PropTypes.func.isRequired,
 };
 
 export default AlbumRow;

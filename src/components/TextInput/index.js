@@ -15,8 +15,9 @@ function TextInput({ label, type, register, err }) {
 TextInput.propTypes = {
   label: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  register: PropTypes.shape.isRequired,
-  err: PropTypes.shape.isRequired,
+  register: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  err: PropTypes.func,
 };
 
 export default TextInput;

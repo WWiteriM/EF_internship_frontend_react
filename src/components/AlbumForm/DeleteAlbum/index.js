@@ -25,7 +25,10 @@ function DeleteAlbum({ id, onClose, setAlbums }) {
     <DeleteAlbumContainer>
       <DeleteAlbumContent>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h1>Delete {id} album</h1>
+          <h1>
+            Delete
+            {id} album
+          </h1>
           <Label>
             <strong>Warning! </strong>
             Are you sure you want to delete this entry? If you delete the entry, it will be
@@ -44,7 +47,7 @@ function DeleteAlbum({ id, onClose, setAlbums }) {
 DeleteAlbum.propTypes = {
   id: PropTypes.number.isRequired,
   onClose: PropTypes.func.isRequired,
-  setAlbums: PropTypes.shape.isRequired,
+  setAlbums: PropTypes.func.isRequired,
 };
 
 export default DeleteAlbum;
