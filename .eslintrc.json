@@ -27,7 +27,6 @@
         "exceptions": [""]
       }
     ],
-    "indent": ["error", 2, { "MemberExpression": 1 }],
-    "react/prop-types": "off"
+    "indent": ["error", 2, { "MemberExpression": 1 }]
   }
 }
