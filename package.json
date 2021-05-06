@@ -3,13 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@hookform/resolvers": "^2.4.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.21.1",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.2.3",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "reactjs-popup": "^2.0.4",
+    "styled-components": "^5.2.3",
+    "web-vitals": "^1.0.1",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "eslint": "^7.24.0",
@@ -18,7 +26,9 @@
     "eslint-plugin-prettier": "^3.4.0",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.4",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "stylelint": "^13.13.0",
+    "stylelint-config-standard": "^22.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,6 +37,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src",
     "fix": "eslint ./src --fix",
+    "stylelint": "stylelint \"**/style.js\"",
     "prettier": "prettier --write \"**/*.+(json|yml|yaml|css|md)\""
   },
   "eslintConfig": {
@@ -64,9 +75,8 @@
   },
   "lint-staged": {
     "*.+(js|jsx)": [
-      "npm run lint"
-    ],
-    "*.+(json|css|md)": [
+      "npm run lint",
+      "npm run stylelint",
       "npm run prettier"
     ]
   }
