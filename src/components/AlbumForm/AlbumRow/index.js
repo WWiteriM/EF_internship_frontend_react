@@ -16,22 +16,22 @@ import {
 } from './style';
 
 function AlbumRow(props) {
-  const { el, setAlbums } = props;
+  const { id, name } = props;
   const history = useHistory();
 
-  const redirectToAlbum = (id) => {
+  const redirectToAlbum = () => {
     history.push(`/albums/${id}`);
   };
 
   return (
     <TableRow>
-      <TableCell>{el.id}</TableCell>
+      <TableCell>{id}</TableCell>
       <TableCellLink
         onClick={() => {
-          redirectToAlbum(el.id);
+          redirectToAlbum(id);
         }}
       >
-        {el.name}
+        {name}
       </TableCellLink>
       <Popup
         trigger={() => <TableCellControl>Control panel</TableCellControl>}
@@ -41,10 +41,10 @@ function AlbumRow(props) {
       >
         <ControlPanel>
           <Popup trigger={<Update> Update </Update>} modal nested>
-            {(close) => <UpdateAlbum setAlbums={setAlbums} id={el.id} onClose={() => close()} />}
+            {(close) => <UpdateAlbum id={id} onClose={() => close()} />}
           </Popup>
           <Popup trigger={<Delete> Delete </Delete>} modal nested>
-            {(close) => <DeleteAlbum setAlbums={setAlbums} id={el.id} onClose={() => close()} />}
+            {(close) => <DeleteAlbum id={id} onClose={() => close()} />}
           </Popup>
         </ControlPanel>
       </Popup>
@@ -53,8 +53,8 @@ function AlbumRow(props) {
 }
 
 AlbumRow.propTypes = {
-  el: PropTypes.objectOf(PropTypes.object).isRequired,
-  setAlbums: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default AlbumRow;

@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { getAllAlbums } from '../../http/requests/albums/index';
 import AlbumRow from './AlbumRow';
-import {
-  TableContainer, Table, TableHead,
-} from './style';
+import { fetchAlbums } from '../../resources/albums/actions';
+import { getAllAlbums } from '../../resources/albums/selectors';
+import { TableContainer, Table, TableHead } from './style';
 
 function AlbumForm() {
-  const [albums, setAlbums] = useState([]);
+  const dispatch = useDispatch();
 
-  useEffect(async () => {
-    const result = await getAllAlbums();
-    setAlbums(result);
-  }, [setAlbums]);
+  useEffect(() => {
+    dispatch(fetchAlbums());
+  }, []);
+
+  const albumsData = useSelector(getAllAlbums);
 
   return (
     <TableContainer>
@@ -25,7 +26,7 @@ function AlbumForm() {
           </TableHead>
         </thead>
         <tbody>
-          {albums.map((el) => <AlbumRow setAlbums={setAlbums} key={el.id} el={el} />)}
+          {albumsData && albumsData.map((el) => <AlbumRow key={el.id} id={el.id} name={el.name} />)}
         </tbody>
       </Table>
     </TableContainer>
