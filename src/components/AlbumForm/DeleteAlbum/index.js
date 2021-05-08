@@ -1,8 +1,9 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
-import { deleteAlbum, getAllAlbums } from '../../../http/requests/albums/index';
+import { deleteAlbums } from '../../../resources/albums/actions';
 import {
   DeleteAlbumContainer,
   DeleteAlbumContent,
@@ -11,13 +12,14 @@ import {
   ActionButton,
 } from './style';
 
-function DeleteAlbum({ id, onClose, setAlbums }) {
+function DeleteAlbum(props) {
+  const { id, onClose } = props;
+
   const { handleSubmit } = useForm();
+  const dispatch = useDispatch();
 
   const onSubmit = async () => {
-    await deleteAlbum(id);
-    const result = await getAllAlbums();
-    setAlbums(result);
+    await dispatch(deleteAlbums(id));
     await onClose();
   };
 
@@ -27,7 +29,9 @@ function DeleteAlbum({ id, onClose, setAlbums }) {
         <form onSubmit={handleSubmit(onSubmit)}>
           <h1>
             Delete
-            {id} album
+            {id}
+            {' '}
+            album
           </h1>
           <Label>
             <strong>Warning! </strong>
@@ -47,7 +51,6 @@ function DeleteAlbum({ id, onClose, setAlbums }) {
 DeleteAlbum.propTypes = {
   id: PropTypes.number.isRequired,
   onClose: PropTypes.func.isRequired,
-  setAlbums: PropTypes.func.isRequired,
 };
 
 export default DeleteAlbum;

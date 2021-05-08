@@ -1,10 +1,11 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import PropTypes from 'prop-types';
 
-import { updateAlbum, getAllAlbums } from '../../../http/requests/albums/index';
+import { updateAlbums } from '../../../resources/albums/actions';
 import TextInput from '../../TextInput';
 import {
   UpdateAlbumContainer,
@@ -18,7 +19,9 @@ const UpdateAlbumSchema = yup.object().shape({
   name: yup.string().required(),
 });
 
-function UpdateAlbum({ id, onClose, setAlbums }) {
+function UpdateAlbum(props) {
+  const { id, onClose } = props;
+
   const {
     register,
     handleSubmit,
@@ -26,11 +29,10 @@ function UpdateAlbum({ id, onClose, setAlbums }) {
   } = useForm({
     resolver: yupResolver(UpdateAlbumSchema),
   });
+  const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
-    await updateAlbum(id, data);
-    const result = await getAllAlbums();
-    setAlbums(result);
+    await dispatch(updateAlbums(id, data));
     await onClose();
   };
 
@@ -40,7 +42,9 @@ function UpdateAlbum({ id, onClose, setAlbums }) {
         <form onSubmit={handleSubmit(onSubmit)}>
           <h1>
             Update
-            {id} album:
+            {id}
+            {' '}
+            album:
           </h1>
           <Label>
             Fill in all the required fields in order to change the information about the album.
@@ -60,7 +64,6 @@ function UpdateAlbum({ id, onClose, setAlbums }) {
 UpdateAlbum.propTypes = {
   id: PropTypes.number.isRequired,
   onClose: PropTypes.func.isRequired,
-  setAlbums: PropTypes.func.isRequired,
 };
 
 export default UpdateAlbum;

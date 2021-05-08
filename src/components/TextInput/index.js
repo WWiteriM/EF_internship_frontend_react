@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 
 import { TextField, ErrorMessage } from './style';
 
-function TextInput({ label, type, register, err }) {
+function TextInput(props) {
+  const {
+    label, type, register, err,
+  } = props;
+
   return (
     <div>
       {err && <ErrorMessage>{err.message}</ErrorMessage>}
